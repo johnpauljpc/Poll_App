@@ -2,9 +2,9 @@
 {% extends 'base.html' %}
 
 {%block content%}
-{% if questions %}
+{% if question_list %}
 
-	{% for q in questions%}
+	{% for q in question_list%}
 	<li><a href="{% url 'polls:detail' q.id %}">{{q}}</a></li>
 	{% endfor %}
 {%else%}

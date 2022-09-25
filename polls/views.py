@@ -3,13 +3,24 @@ from django.http import Http404, HttpResponseRedirect
 from django.urls import reverse
 from django.http import HttpResponse
 from .models import Question, Choice
+from django.views.generic import (CreateView, DetailView,
+    ListView, View, UpdateView)
 
 # Create your views here.
 
-def index(request):
-	lattest_questions = Question.objects.all().order_by('-pub_date')[:7]
+class index(ListView):
+    template_name = 'index.html'
 
-	return render(request, 'index.html', {'questions':lattest_questions})
+    def get_queryset(self):
+        return Question.objects.all().order_by('-pub_date')[:5]
+
+class detail(DetailView):
+    model = Question
+    template_name = 'detail.html'
+    #context_object_name = 'question'
+
+
+'''
 def detail(request, question_id):
     try:
         question = Question.objects.get(id = question_id)
@@ -22,6 +33,7 @@ def detail(request, question_id):
         return  render(request, 'index.html')
 
     return  render(request, 'detail.html', context)
+'''
 
 
 
@@ -45,6 +57,7 @@ def vote(request, question_id):
     return HttpResponse("You're voting on question %s." % question_id)
 
 
-def results(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'results.html', {'question': question})
+class results(DetailView):
+    model = Question
+    template_name = 'results.html'
+    context_object_name = 'question'
