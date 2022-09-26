@@ -1,5 +1,6 @@
 
 {% extends 'base.html' %}
+{% load static %}
 
 {%block content%}
 {% if question_list %}
@@ -10,4 +11,5 @@
 {%else%}
 	<h3>No Questions Yet!</h3>
 {%endif%}
+
 {%endblock content%}
