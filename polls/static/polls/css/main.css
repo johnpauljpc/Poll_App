@@ -1,3 +1,5 @@
 .bg {
-	background-image: url('../img/vote.jpg');
+	/*background-image: url('../img/vote.jpg');
+	background-repeat: no-repeat; */
+	background-color: whitesmoke;
 }
